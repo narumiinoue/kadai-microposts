@@ -1,6 +1,5 @@
 class FavoritesController < ApplicationController
   before_action :require_user_logged_in
-  before_action :set_microposts
   
   def create
     micropost = Micropost.find(params[:micropost_id])
@@ -16,9 +15,4 @@ class FavoritesController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
   
-  private
-  
-  def set_microposts
-    @microposts = current_user.feed_microposts.order(id: :desc).page(params[:page])
-  end
 end
